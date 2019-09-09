@@ -181,5 +181,7 @@ dh_hand_driver/
 
 6. ## TODO:
 	> Improve performance and stability
+	>
 	> Add URDF support and simulation
+	>
 	> More control interfaces
