@@ -25,7 +25,6 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   serial
   std_msgs
-  sensor_msgs
   message_generation
   actionlib_msgs
   actionlib
@@ -46,8 +45,6 @@ generate_messages(
   DEPENDENCIES 
   actionlib_msgs 
   std_msgs
-  sensor_msgs
-
 )
 
 catkin_package(
@@ -60,7 +57,6 @@ catkin_package(
     serial
     actionlib_msgs
     std_msgs
-    sensor_msgs
 )
 
 # add_library(LIBS
@@ -79,11 +75,17 @@ include_directories(
 #include/dh_hand_driver/hand_driver.cpp 
 #)
 
+
 add_executable(hand_controller   
 include/dh_hand_driver/hand_controller.cpp
 include/dh_hand_driver/DH_datastream.cpp 
 include/dh_hand_driver/hand_driver.cpp 
 src/node.cpp)
+
+add_dependencies(hand_controller
+  dh_hand_driver_generate_messages_cpp
+  ${dh_hand_driver_EXPORTED_TARGETS})
+
 target_link_libraries(hand_controller 
 ${catkin_LIBRARIES})
 

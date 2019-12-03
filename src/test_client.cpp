@@ -41,7 +41,7 @@ public:
         goal.force      = setforce;
         goal.position   = setpos;
 
-        ROS_INFO("Send goal");
+        ROS_INFO("Send goal %d %d %d", goal.MotorID,goal.force,goal.position);
         //sen goal
         client.sendGoal(goal,
                 boost::bind(&DH_HandActionClient::DoneCb, this, _1, _2),
@@ -49,13 +49,13 @@ public:
                 boost::bind(&DH_HandActionClient::FeedbackCb, this, _1));
         ROS_INFO("wait result");
  
-        client.waitForResult(ros::Duration(10.0));
+        client.waitForResult(ros::Duration(15.0));
 
         //process the result
         if (client.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
             ROS_INFO("Send commond succeeded");
         else {
-            ROS_INFO("Cancel Goal!");
+            ROS_WARN("Cancel Goal!");
             client.cancelAllGoals();
         }
 
@@ -75,18 +75,60 @@ int main(int argc, char** argv) {
   ROS_INFO("starting");
   ros::NodeHandle n;
   DH_HandActionClient actionclient("actuate_hand", true);
-  //int i=100;
-  //while(i--)
-  {
-    ROS_INFO("starting client");
-    actionclient.Start(atoi(argv[1]),atoi(argv[2]),atoi(argv[3]));
-    //actionclient.Start(1,i,100);
-    ros::spinOnce();
-  }
 
-   //use service to get hand state
+     //use service to get hand state
     ros::ServiceClient client = n.serviceClient<dh_hand_driver::hand_state>("hand_joint_state");
     dh_hand_driver::hand_state srv;
+
+//   int i_position=0;
+//   int i_force=20;
+  while(1)
+  {
+
+    // if(i_position>100)
+    // {
+    //     i_position=0;
+    // }    
+    // if(i_force>100)
+    // {
+    //     i_force=20;
+    // }   
+    // i_position++;
+    // i_force++;  
+     ROS_INFO("starting client");
+    actionclient.Start(atoi(argv[1]),atoi(argv[2]),atoi(argv[3]));
+    // actionclient.Start(1,i_position,i_force);
+    ros::spinOnce();
+
+
+      srv.request.get_target = 0;
+    if (client.call(srv))
+    {
+        ROS_INFO("force: %d",srv.response.return_data);
+    }
+     else
+    {
+        ROS_ERROR("Failed to call service");
+        return 1;
+    }
+    srv.request.get_target = 1;
+    if (client.call(srv))
+    {
+        ROS_INFO("pos_1: %d",srv.response.return_data);
+    }
+     else
+    {
+        ROS_ERROR("Failed to call service");
+        return 1;
+    }
+  
+    actionclient.Start(1,100,100);
+    ros::spinOnce();
+
+
+//    //use service to get hand state
+//     ros::ServiceClient client = n.serviceClient<dh_hand_driver::hand_state>("hand_joint_state");
+//     dh_hand_driver::hand_state srv;
     srv.request.get_target = 0;
     if (client.call(srv))
     {
@@ -107,6 +149,7 @@ int main(int argc, char** argv) {
         ROS_ERROR("Failed to call service");
         return 1;
     }
+}
     //this command belong AG-3E
     //    srv.request.get_target = 2;
     // if (client.call(srv))

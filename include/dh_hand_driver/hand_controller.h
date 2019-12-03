@@ -70,7 +70,7 @@ public:
      * @brief Initialize the Hand
      * 
      */
-    void initHand();
+    bool initHand();
 
     /**
      * @brief Move individual joint
@@ -86,7 +86,7 @@ public:
      * 
      * @param gripping_force 
      */
-    void setGrippingForce(int gripping_force);
+    bool setGrippingForce(int gripping_force);
 
     /**
      * @brief Write data to serial
@@ -103,7 +103,12 @@ public:
      * @return true on recevied success; 
      * @return false on recevied overtime;
      */
-    bool Readdata();
+    bool Readdata(uint8_t waitconunt = 5);
+
+    bool ensure_set_command(std::vector<uint8_t> data);
+    bool ensure_get_command(std::vector<uint8_t> data);
+    bool ensure_run_end(std::vector<uint8_t> data);
+    bool chacke_data(uint8_t *data);
 
     /**
      * @brief service callback function

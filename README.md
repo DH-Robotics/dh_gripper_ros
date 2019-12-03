@@ -147,9 +147,9 @@ dh_hand_driver/
    > motorID	: 	AG-2E has one motor ,  this parameter just be 1;
    >				AG-3E has two motor ,  this parameter can  be 1 or 2
    >
-   > position	:	Range from 0   to 95
+   > position	:	Range from 0   to 100
    >
-   > Force	: 	Range from 30 to 90
+   > Force	: 	Range from 20 to 100
 
    such as :
 
