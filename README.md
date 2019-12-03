@@ -85,6 +85,8 @@ dh_hand_driver/
 
    > Notice: If compile error : dh_hand_driver/hand_state.h: No such file or directory 
    > 		please compile it again
+   >
+   > Or try : catkin_make -j1
 
 6. Add the path including to the `ROS_PACKAGE_PATH` environment variable. Open `~/.bashrc` file and add at the end the following line. 
 
