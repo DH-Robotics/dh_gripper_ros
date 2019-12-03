@@ -180,8 +180,6 @@ dh_hand_driver/
 5. ##### Enjoy it
 
 6. ## TODO:
-	> Improve performance and stability
-	>
 	> Add URDF support and simulation
 	>
 	> More control interfaces
