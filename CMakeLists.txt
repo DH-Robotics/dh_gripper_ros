@@ -91,5 +91,9 @@ ${catkin_LIBRARIES})
 
 add_executable(hand_controller_client   
 src/test_client.cpp)
+
+add_dependencies(hand_controller_client   
+  dh_hand_driver_generate_messages_cpp
+  ${dh_hand_driver_EXPORTED_TARGETS})
 target_link_libraries(hand_controller_client  ${catkin_LIBRARIES})
 
