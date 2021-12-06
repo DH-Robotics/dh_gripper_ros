@@ -1,0 +1,11 @@
+digraph G {
+node [shape=box];
+"base_link" [label="base_link"];
+"finger1_link" [label="finger1_link"];
+"finger2_link" [label="finger2_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_link" -> "finger1_joint" [label="xyz: 0.0132 0.0265 0.093 \nrpy: 0 0 -1.5708"]
+"finger1_joint" -> "finger1_link"
+"base_link" -> "finger2_joint" [label="xyz: -0.0132 -0.0265 0.093 \nrpy: 0 -0 1.5708"]
+"finger2_joint" -> "finger2_link"
+}

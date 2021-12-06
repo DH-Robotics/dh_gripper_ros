@@ -1,0 +1,38 @@
+digraph G {
+node [shape=box];
+"world" [label="world"];
+"gripper_root_link" [label="gripper_root_link"];
+"ee_link" [label="ee_link"];
+"gripper_base_link" [label="gripper_base_link"];
+"gripper_finger1_inner_knuckle_link" [label="gripper_finger1_inner_knuckle_link"];
+"gripper_finger1_finger_tip_link" [label="gripper_finger1_finger_tip_link"];
+"gripper_finger1_knuckle_link" [label="gripper_finger1_knuckle_link"];
+"gripper_finger1_finger_link" [label="gripper_finger1_finger_link"];
+"gripper_finger2_inner_knuckle_link" [label="gripper_finger2_inner_knuckle_link"];
+"gripper_finger2_finger_tip_link" [label="gripper_finger2_finger_tip_link"];
+"gripper_finger2_knuckle_link" [label="gripper_finger2_knuckle_link"];
+"gripper_finger2_finger_link" [label="gripper_finger2_finger_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"world" -> "world_fixed" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"world_fixed" -> "gripper_root_link"
+"gripper_root_link" -> "ee_fixed_joint" [label="xyz: 0.05 0 0.85 \nrpy: 0 -0 0"]
+"ee_fixed_joint" -> "ee_link"
+"ee_link" -> "gripper_base_joint" [label="xyz: 0 0 0 \nrpy: 1.57075 -0 1.57075"]
+"gripper_base_joint" -> "gripper_base_link"
+"gripper_base_link" -> "gripper_finger1_inner_knuckle_joint" [label="xyz: -0.016 0 0.10586 \nrpy: 0 -0 3.14"]
+"gripper_finger1_inner_knuckle_joint" -> "gripper_finger1_inner_knuckle_link"
+"gripper_finger1_inner_knuckle_link" -> "gripper_finger1_finger_tip_joint" [label="xyz: 0.0394969 0 0.0382752 \nrpy: 0 -0 0"]
+"gripper_finger1_finger_tip_joint" -> "gripper_finger1_finger_tip_link"
+"gripper_base_link" -> "gripper_finger1_joint" [label="xyz: -0.016 0 0.10586 \nrpy: 0 -0 3.14"]
+"gripper_finger1_joint" -> "gripper_finger1_knuckle_link"
+"gripper_finger1_knuckle_link" -> "gripper_finger1_finger_joint" [label="xyz: 0.029208 0 -0.0227133 \nrpy: 0 -0 0"]
+"gripper_finger1_finger_joint" -> "gripper_finger1_finger_link"
+"gripper_base_link" -> "gripper_finger2_inner_knuckle_joint" [label="xyz: 0.016 0 0.10586 \nrpy: 0 -0 0"]
+"gripper_finger2_inner_knuckle_joint" -> "gripper_finger2_inner_knuckle_link"
+"gripper_finger2_inner_knuckle_link" -> "gripper_finger2_finger_tip_joint" [label="xyz: 0.0394969 0 0.0382752 \nrpy: 0 -0 0"]
+"gripper_finger2_finger_tip_joint" -> "gripper_finger2_finger_tip_link"
+"gripper_base_link" -> "gripper_finger2_joint" [label="xyz: 0.016 0 0.10586 \nrpy: 0 -0 0"]
+"gripper_finger2_joint" -> "gripper_finger2_knuckle_link"
+"gripper_finger2_knuckle_link" -> "gripper_finger2_finger_joint" [label="xyz: 0.029208 0 -0.0227133 \nrpy: 0 -0 0"]
+"gripper_finger2_finger_joint" -> "gripper_finger2_finger_link"
+}
